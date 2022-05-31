@@ -18,30 +18,30 @@ securityDefinitions:
 
 paths:
   /users:
-    $ref: "./users/users.yaml"
+    $ref: "./users/users/users.yaml"
   /user/{uid}:      
-    $ref: "./user/user.yaml"            
+    $ref: "./users/user/user.yaml"            
   /avatars:
-    $ref: "./avatars/avatars.yaml"
+    $ref: "./avatars/avatars/avatars.yaml"
   /avatar/{avatar_id}:
-    $ref: "./avatar/avatar.yaml"
+    $ref: "./avatars/avatar/avatar.yaml"
   /rooms:
-    $ref: "./rooms/rooms.yaml"
+    $ref: "./rooms/rooms/rooms.yaml"
   /room/{room_id}:
-    $ref: "./room/room.yaml"
+    $ref: "./rooms/room/room.yaml"
   /chats:
-    $ref: "./chats/chats.yaml"
+    $ref: "./chats/chats/chats.yaml"
   /chat/{receiver_id}:
-    $ref: "./chat/chat.yaml"
+    $ref: "./chats/chat/chat.yaml"
   /files/{room_id}:
-    $ref: "./files/files.yaml"
+    $ref: "./files/files/files.yaml"
   /file/{file_id}:
-    $ref: "./file/file.yaml"
+    $ref: "./files/file/file.yaml"
   /providers/{provider_id}:
-    $ref: "./providers/providers.yaml"
+    $ref: "./files/providers/providers.yaml"
   /comments/{file_id}:
-    $ref: "./comments/comments.yaml"
+    $ref: "./comments/comments/comments.yaml"
   /threads/{comment_id}:
-    $ref: "./threads/threads.yaml"
+    $ref: "./comments/threads/threads.yaml"
   /thread/{thread_id}:
-    $ref: "./thread/thread.yaml"
+    $ref: "./comments/thread/thread.yaml"

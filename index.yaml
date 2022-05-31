@@ -1,0 +1,27 @@
+swagger: "2.0"
+
+info:
+  version: "2.0.0"
+  title: Room
+
+schemes:
+- "https"
+- "http"
+
+securityDefinitions:
+  basicAuth:
+    type: basic
+  tokenAuth:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+
+paths:
+  /users:
+    $ref: "./users/users.yaml"
+  /user/{uid}:      
+    $ref: "./user/user.yaml"            
+  /avatars:
+    $ref: "./avatars/avatars.yaml"
+  /avatar/{avatar_id}:
+    $ref: "./avatar/avatar.yaml"        

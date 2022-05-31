@@ -1,5 +1,4 @@
-tags:
-  - comments
+$ref: "./tags.yaml"
 description: |
   Adds Particular User
 security:

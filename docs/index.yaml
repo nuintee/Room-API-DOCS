@@ -24,4 +24,24 @@ paths:
   /avatars:
     $ref: "./avatars/avatars.yaml"
   /avatar/{avatar_id}:
-    $ref: "./avatar/avatar.yaml"        
+    $ref: "./avatar/avatar.yaml"
+  /rooms:
+    $ref: "./rooms/rooms.yaml"
+  /room/{room_id}:
+    $ref: "./room/room.yaml"
+  /chats:
+    $ref: "./chats/chats.yaml"
+  /chat/{receiver_id}:
+    $ref: "./chat/chat.yaml"
+  /files/{room_id}:
+    $ref: "./files/files.yaml"
+  /file/{file_id}:
+    $ref: "./file/file.yaml"
+  /providers/{provider_id}:
+    $ref: "./providers/providers.yaml"
+  /comments/{file_id}:
+    $ref: "./comments/comments.yaml"
+  /threads/{comment_id}:
+    $ref: "./threads/threads.yaml"
+  /thread/{thread_id}:
+    $ref: "./thread/thread.yaml"

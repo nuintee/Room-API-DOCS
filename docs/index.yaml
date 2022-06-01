@@ -1978,6 +1978,58 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+
+    post:
+        tags:
+          - threads
+        summary: Adds new Thread
+        parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+          - in: query
+            name: comment_id
+            schema:
+              type: integer
+            required: true
+            description: Comment ID
+        requestBody:
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    type: string
+
+        responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Thread"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
   
     delete:
       tags:
@@ -2136,6 +2188,9 @@ components:
         play_position:
           type: integer
           format: timestamp
+        created_at:
+          type: integer
+          format: date
         last_update:
           type: integer
           format: date
@@ -2149,6 +2204,9 @@ components:
           type: string
         user_id:
           type: integer
+        created_at:
+          type: integer
+          format: date
     
     HTTP400:
       type: object

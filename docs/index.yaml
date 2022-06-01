@@ -37,8 +37,8 @@ security:
 
 tags:
 
-  - name: users:request_bestream
-    description: Requests
+  - name: 🙏 requests
+    description: (bestream)
 
   - name: users
     description: (bestream)
@@ -71,7 +71,7 @@ paths:
   /users:
       get:
         tags:
-          - users:request_bestream
+          - requests
         summary: Gets All Matching users
         parameters:
           - in: query

@@ -1921,6 +1921,118 @@ paths:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
 
+  /threads/{comment_id}:
+    get:
+      tags:
+          - threads
+      summary: Gets all threads
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: comment_id
+          schema:
+            type: string
+          required: true
+          description: Comment ID
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    properties:
+                      next:
+                        type: boolean
+                      pages:
+                        type: integer
+                        example: 2
+                      payload:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Thread"
+                      total:
+                        type: integer
+                        example: 10
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+  
+    delete:
+      tags:
+          - threads
+      summary: Deletes all threads
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: comment_id
+          schema:
+            type: string
+          required: true
+          description: Comment ID
+      
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: "all threads deleted"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+
 components:
   schemas:
 
@@ -2028,6 +2140,15 @@ components:
           type: integer
           format: date
 
+    Thread:
+      type: object
+      properties:
+        comment_id:
+          type: integer
+        comment:
+          type: string
+        user_id:
+          type: integer
     
     HTTP400:
       type: object

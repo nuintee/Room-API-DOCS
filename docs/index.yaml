@@ -2089,7 +2089,7 @@ paths:
     get:
       tags:
           - threads
-      summary: Gets particluar threads
+      summary: Gets particluar thread
       parameters:
         - in: query
           name: access_code
@@ -2129,7 +2129,109 @@ paths:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
     put:
+      tags:
+          - threads
+      summary: Updates particluar thread
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: thread_id
+          schema:
+            type: string
+          required: true
+          description: Thread ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Thread"    
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+
     delete:
+      tags:
+        - threads
+      summary: Deletes particluar thread
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: thread_id
+          schema:
+            type: string
+          required: true
+          description: Thread ID
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: "thread deleted"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
 
 components:
   schemas:

@@ -850,13 +850,11 @@ paths:
                     pages:
                       type: integer
                     payload:
-                      type: array
                       items:
-                        properties: 
-                          id:
-                            type: integer
-                    total: 
+                        $ref: "#/components/schemas/Chat"
+                    total:
                       type: integer
+                  
 
 
 components:
@@ -895,6 +893,21 @@ components:
           type: string
         username: 
           type: string
+    
+    Chat:
+      type: object
+      properties:
+        sender_id:
+          type: integer
+        receiver_id:
+          type: integer
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+            - text
+            - file
     
     HTTP400:
       type: object

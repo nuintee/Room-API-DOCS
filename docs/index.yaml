@@ -558,6 +558,12 @@ paths:
             type: string
           required: false
           description: User code
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+          description: Room name
       responses:
           "200":
             description: Success
@@ -579,10 +585,79 @@ paths:
                       total:
                         type: integer
                         example: 10
+  
+  /room:
+    get:
+      tags: 
+        - rooms
+      summary: Gets Particluar Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: query
+          name: room_id
+          schema:
+            type: string
+          required: true
+          description: Room ID
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Room"
+    post:
+      tags: 
+        - rooms
+      summary: Adds Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                room_name:
+                  type: string
+                cover:
+                  type: string
+                invited_users_id:
+                  type: array
+                  items:
+                    type: integer
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      example: 200
+                    type:
+                      type: string
+                      example: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      example: room added
 
 components:
-
   schemas:
+
     Room:
       type: object
       properties:
@@ -594,7 +669,7 @@ components:
           type: string
         cover:
           type: string
-        title:
+        room_name:
           type: string
         user_ammount:
           type: integer
@@ -616,6 +691,7 @@ components:
           type: string
         username: 
           type: string
+        
 
   securitySchemes:
     BearerAuth:

@@ -829,14 +829,23 @@ paths:
             name: sender_id
             schema:
               type: integer
-            required: true
+            required: false
             description: Sender ID
           - in: query
             name: receiver_id
             schema:
               type: integer
+            required: false
+            description: Receiver ID
+          - in: query
+            name: either_id
+            schema:
+              type: string
+              enum: ["{sender_id}","{receiver_id}"]
             required: true
             description: Receiver ID
+
+
         responses:
           "200":
             description: Success
@@ -854,8 +863,43 @@ paths:
                         $ref: "#/components/schemas/Chat"
                     total:
                       type: integer
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
                   
-
+  /chat/{receiver_id}:
+    get:
+        tags:
+          - chats
+        summary: Gets {receiver_id}'s chat history
+        parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+          - in: path
+            name: receiver_id
+            schema:
+              type: integer
+            required: true
+            description: Receiver ID
 
 components:
   schemas:

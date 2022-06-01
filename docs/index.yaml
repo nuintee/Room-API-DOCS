@@ -35,6 +35,38 @@ components:
 security:
   - BearerAuth: []
 
+tags:
+
+  - name: users:request_bestream
+    description: Requests
+
+  - name: users
+    description: (bestream)
+
+  - name: history
+    description: (bestream)
+
+  - name: like
+    description: (bestream)
+
+  - name: sharing
+    description: (bestream)
+
+  - name: videos
+    description: (bestream)
+
+  - name: trash
+    description: (bestream)
+
+  - name: retrieve
+    description: (bestream)
+
+  - name: images
+    description: (bestream)
+
+  - name: albums
+    description: (bestream)
+
 paths:
   /users:
       get:
@@ -73,7 +105,7 @@ paths:
   /user:
       get:
         tags:
-          - users:bestream
+          - users
         summary: Gets user information
         parameters:
           - in: query
@@ -100,7 +132,7 @@ paths:
   /user/code/create:
       post:
         tags: 
-          - users:bestream
+          - users
         summary: Sets user code
         parameters:
           - in: query
@@ -125,7 +157,7 @@ paths:
   /user/history/list:
       get:
         tags:
-          - history:bestream
+          - history
         summary: Gets history list
         parameters:
           - in: query
@@ -158,7 +190,7 @@ paths:
   /user/like/list:
       get:
         tags:
-          - like:bestream
+          - like
         summary: Gets like list
         parameters:
           - in: query
@@ -191,7 +223,7 @@ paths:
   /user/sharing/list:
       get:
         tags:
-          - sharing:bestream
+          - sharing
         summary: Gets sharing list
         parameters:
           - in: query
@@ -218,7 +250,7 @@ paths:
   /user/video/list:
       get:
         tags:
-          - videos:bestream
+          - videos
         summary: Gets video list
         parameters:
           - in: query
@@ -251,7 +283,7 @@ paths:
   /user/trush/list:
       get:
         tags:
-          - trash:bestream
+          - trash
         summary: Gets trushed list
         parameters:
           - in: query
@@ -284,7 +316,7 @@ paths:
   /user/video/retrieve/{video_code}:
       get:
         tags:
-          - retrieve:bestream
+          - retrieve
         summary: Retrieve video
         parameters:
           - in: path
@@ -317,7 +349,7 @@ paths:
   /user/video/trash:
       post:
         tags:
-          - trash:bestream
+          - trash
         summary: Trash video
         parameters:
           - in: query
@@ -347,7 +379,7 @@ paths:
   /user/video/recover:
       post:
         tags:
-          - trash:bestream
+          - trash
         summary: Recover video from Trash
         parameters:
           - in: query
@@ -371,7 +403,7 @@ paths:
   /user/video/update:
       post:
         tags:
-          - videos:bestream
+          - videos
         summary: Update video
         parameters:
           - in: query
@@ -395,7 +427,7 @@ paths:
   /user/video/image:
       post:
         tags:
-          - images:bestream
+          - images
         summary: Update thumbnail image
         parameters:
           - in: query
@@ -441,7 +473,7 @@ paths:
   /user/video/delete:
       post:
         tags:
-          - videos:bestream
+          - videos
         summary: Deletes video
         parameters:
           - in: query
@@ -465,7 +497,7 @@ paths:
   /user/video/download-link/{video_code}:
       post:
         tags:
-          - videos:bestream
+          - videos
         summary: Gets download url
         parameters:
           - in: query
@@ -491,7 +523,7 @@ paths:
   /user/album:
       post:
         tags:
-          - albums:bestream
+          - albums
         summary: Gets album
         parameters:
           - in: query

@@ -25,13 +25,6 @@ servers:
       port:
         default: '3001'
 
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      description: Credentials or access token for API
-
 security:
   - BearerAuth: []
 
@@ -67,11 +60,14 @@ tags:
   - name: albums
     description: (bestream)
 
+  - name: rooms
+    description: (Room)
+
 paths:
   /users:
       get:
         tags:
-          - requests
+          - 🙏 requests
         summary: Gets All Matching users
         parameters:
           - in: query
@@ -543,4 +539,80 @@ paths:
                     status:
                       type: string
                       example: success
-  
+
+  /rooms:
+    get:
+      tags: 
+        - rooms
+      summary: Gets All Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    properties:
+                      next:
+                        type: boolean
+                      pages:
+                        type: integer
+                        example: 2
+                      payload:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Room"
+                      total:
+                        type: integer
+                        example: 10
+
+components:
+
+  schemas:
+    Room:
+      type: object
+      properties:
+        room_id: 
+          type: integer
+        master_id:
+          type: integer
+        master_username:
+          type: string
+        cover:
+          type: string
+        title:
+          type: string
+        user_ammount:
+          type: integer
+        room_users:
+          $ref: "#/components/schemas/User"
+          
+    User:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        email:
+          type: string
+        icon:
+          type: string
+        joined_at:
+          type: integer
+        avatar_id: 
+          type: string
+        username: 
+          type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API

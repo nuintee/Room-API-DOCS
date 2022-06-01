@@ -98,13 +98,15 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                user:
+            content:
+              application/json:
+                schema:
                   type: object
+                  properties:
+                    status:
+                      type: string
+                    user:
+                      type: object
 
   /user/history/list:
       get:
@@ -121,21 +123,23 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                next:
-                  type: boolean
-                pages:
-                  type: integer
-                payload:
-                  type: array
-                  items:
-                    properties: 
-                      id:
-                        type: integer
-                total: 
-                  type: integer
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    next:
+                      type: boolean
+                    pages:
+                      type: integer
+                    payload:
+                      type: array
+                      items:
+                        properties: 
+                          id:
+                            type: integer
+                    total: 
+                      type: integer
 
   /user/like/list:
       get:
@@ -152,21 +156,23 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                next:
-                  type: boolean
-                pages:
-                  type: integer
-                payload:
-                  type: array
-                  items:
-                    properties: 
-                      id:
-                        type: integer
-                total: 
-                  type: integer
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    next:
+                      type: boolean
+                    pages:
+                      type: integer
+                    payload:
+                      type: array
+                      items:
+                        properties: 
+                          id:
+                            type: integer
+                    total: 
+                      type: integer
 
   /user/sharing/list:
       get:
@@ -183,15 +189,17 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                payload:
-                  type: array
-                  items:
-                    properties: 
-                      id:
-                        type: integer
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    payload:
+                      type: array
+                      items:
+                        properties: 
+                          id:
+                            type: integer
 
   /user/video/list:
       get:
@@ -208,21 +216,23 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                next:
-                  type: boolean
-                pages:
-                  type: integer
-                payload:
-                  type: array
-                  items:
-                    properties: 
-                      id:
-                        type: integer
-                total: 
-                  type: integer
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    next:
+                      type: boolean
+                    pages:
+                      type: integer
+                    payload:
+                      type: array
+                      items:
+                        properties: 
+                          id:
+                            type: integer
+                    total: 
+                      type: integer
 
   /user/trush/list:
       get:
@@ -239,21 +249,23 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                next:
-                  type: boolean
-                pages:
-                  type: integer
-                payload:
-                  type: array
-                  items:
-                    properties: 
-                      id:
-                        type: integer
-                total: 
-                  type: integer
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    next:
+                      type: boolean
+                    pages:
+                      type: integer
+                    payload:
+                      type: array
+                      items:
+                        properties: 
+                          id:
+                            type: integer
+                    total: 
+                      type: integer
 
   /user/video/retrieve/{video_code}:
       get:
@@ -276,15 +288,17 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                payload:
-                  type: string
-                  example: U2FsdGVkX18Rc/jJjjZ....... 
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    payload:
+                      type: string
+                      example: U2FsdGVkX18Rc/jJjjZ....... 
+                    status:
+                      type: string
+                      example: success
 
   /user/video/trash:
       post:
@@ -307,12 +321,14 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
 
   /user/video/recover:
       post:
@@ -329,12 +345,14 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
 
   /user/video/update:
       post:
@@ -351,12 +369,14 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
 
   /user/video/image:
       post:
@@ -392,15 +412,17 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                new_file:
-                  type: string
-                  example: /user/OgwlAk/poster/zvAUngGh_thumbnail.jpg?32f67d6bfe0c8e0ae97fc87ed6b1ded4
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    new_file:
+                      type: string
+                      example: /user/OgwlAk/poster/zvAUngGh_thumbnail.jpg?32f67d6bfe0c8e0ae97fc87ed6b1ded4
+                    status:
+                      type: string
+                      example: success
 
   /user/video/delete:
       post:
@@ -417,12 +439,14 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
 
   /user/video/download-link/{video_code}:
       post:
@@ -439,14 +463,16 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                limit:
-                  type: string
-                url:
-                  type: string
-                  example: https://bestream-dev-convert-jp.s3.ap-northeast-1.amazonaws.com/OgwlAk/zvAUngGh/zvAUngGh.webm?X-Amz-Content-Sha256=UNSIGNED-PAYL...
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    limit:
+                      type: string
+                    url:
+                      type: string
+                      example: https://bestream-dev-convert-jp.s3.ap-northeast-1.amazonaws.com/OgwlAk/zvAUngGh/zvAUngGh.webm?X-Amz-Content-Sha256=UNSIGNED-PAYL...
 
   /user/album:
       post:
@@ -463,10 +489,12 @@ paths:
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                status:
-                  type: string
-                  example: success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      example: success
   

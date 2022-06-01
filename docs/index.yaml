@@ -21,31 +21,332 @@ securityDefinitions:
     in: header
 
 paths:
-  /users:
-    $ref: "./users/users/users.yaml"
-  /user/{uid}:      
-    $ref: "./users/user/user.yaml"            
-  /avatars:
-    $ref: "./avatars/avatars/avatars.yaml"
-  /avatar/{avatar_id}:
-    $ref: "./avatars/avatar/avatar.yaml"
-  /rooms:
-    $ref: "./rooms/rooms/rooms.yaml"
-  /room/{room_id}:
-    $ref: "./rooms/room/room.yaml"
-  /chats:
-    $ref: "./chats/chats/chats.yaml"
-  /chat/{receiver_id}:
-    $ref: "./chats/chat/chat.yaml"
-  /files/{room_id}:
-    $ref: "./files/files/files.yaml"
-  /file/{file_id}:
-    $ref: "./files/file/file.yaml"
-  /providers/{provider_id}:
-    $ref: "./files/providers/providers.yaml"
-  /comments/{file_id}:
-    $ref: "./comments/comments/comments.yaml"
-  /threads/{comment_id}:
-    $ref: "./comments/threads/threads.yaml"
-  /thread/{thread_id}:
-    $ref: "./comments/thread/thread.yaml"
+
+  /user:
+    get:
+      tags:
+        - users:bestream
+      summary: Gets user information
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              user:
+                type: object
+              channel:
+                type: object
+              subscription:
+                type: object
+
+  /user/code/create:
+    post:
+      tags: 
+        - users:bestream
+      summary: Sets user code
+      parameters:
+        - in: query
+          name: id
+          type: string
+          required: true
+          description: Auth0 user_id
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              user:
+                type: object
+  
+  /user/history/list:
+    get:
+      tags:
+        - history:bestream
+      summary: Gets history list
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              next:
+                type: boolean
+              pages:
+                type: integer
+              payload:
+                type: array
+                items:
+                  properties: 
+                    id:
+                      type: integer
+              total: 
+                type: integer
+  
+  /user/like/list:
+    get:
+      tags:
+        - like:bestream
+      summary: Gets like list
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              next:
+                type: boolean
+              pages:
+                type: integer
+              payload:
+                type: array
+                items:
+                  properties: 
+                    id:
+                      type: integer
+              total: 
+                type: integer
+  
+  /user/sharing/list:
+    get:
+      tags:
+        - sharing:bestream
+      summary: Gets sharing list
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              payload:
+                type: array
+                items:
+                  properties: 
+                    id:
+                      type: integer
+  
+  /user/video/list:
+    get:
+      tags:
+        - videos:bestream
+      summary: Gets video list
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              next:
+                type: boolean
+              pages:
+                type: integer
+              payload:
+                type: array
+                items:
+                  properties: 
+                    id:
+                      type: integer
+              total: 
+                type: integer
+  
+  /user/trush/list:
+    get:
+      tags:
+        - trash:bestream
+      summary: Gets trushed list
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              next:
+                type: boolean
+              pages:
+                type: integer
+              payload:
+                type: array
+                items:
+                  properties: 
+                    id:
+                      type: integer
+              total: 
+                type: integer
+  
+  /user/video/retrieve/{video_code}:
+    get:
+      tags:
+        - retrieve:bestream
+      summary: Retrieve video
+      parameters:
+        - in: path
+          name: video_code
+          type: string
+          required: true
+          description: Video Code
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              payload:
+                type: string
+                example: U2FsdGVkX18Rc/jJjjZ....... 
+              status:
+                type: string
+                example: success
+  
+  /user/video/trash:
+    post:
+      tags:
+        - trash:bestream
+      summary: Trash video
+      parameters:
+        - in: query
+          name: IDs
+          type: array
+          required: true
+          description: Array of video IDs
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: success
+  
+  /user/video/recover:
+    post:
+      tags:
+        - trash:bestream
+      summary: Recover video from Trash
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: success
+  
+  /user/video/update:
+    post:
+      tags:
+        - videos:bestream
+      summary: Update video
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: success
+  
+  /user/video/image:
+    post:
+      tags:
+        - images:bestream
+      summary: Update thumbnail image
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+        - in: query
+          name: target_code
+          type: string
+          required: true
+          description: Video Code
+        - in: query
+          name: filename
+          type: string
+          required: true
+          description: Original filename
+        - in: query
+          name: thumbnail
+          type: string
+          format: binary
+          required: true
+          description: File data
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              new_file:
+                type: string
+                example: /user/OgwlAk/poster/zvAUngGh_thumbnail.jpg?32f67d6bfe0c8e0ae97fc87ed6b1ded4
+              status:
+                type: string
+                example: success
+  
+  

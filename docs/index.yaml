@@ -14,7 +14,7 @@ servers:
       port:
         default: '3000'
   - url: https://{host}:{port}/api/v1
-    description: Production API
+    description: Room Production API
     variables:
       host:
         default: localhost
@@ -64,21 +64,24 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
           "200":
             description: Success
-            schema:
-              type: object
-              properties:
-                user:
+            content:
+              application/json:
+                schema:
                   type: object
-                channel:
-                  type: object
-                subscription:
-                  type: object
+                  properties:
+                    user:
+                      type: object
+                    channel:
+                      type: object
+                    subscription:
+                      type: object
 
   /user/code/create:
       post:
@@ -88,7 +91,8 @@ paths:
         parameters:
           - in: query
             name: id
-            type: string
+            schema:
+              type: string
             required: true
             description: Auth0 user_id
         responses:
@@ -110,7 +114,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -140,7 +145,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -170,7 +176,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -194,7 +201,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -224,7 +232,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -254,12 +263,14 @@ paths:
         parameters:
           - in: path
             name: video_code
-            type: string
+            schema:
+              type: string
             required: true
             description: Video Code
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -283,12 +294,14 @@ paths:
         parameters:
           - in: query
             name: IDs
-            type: array
+            schema:
+                type: array
             required: true
             description: Array of video IDs
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -309,7 +322,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -330,7 +344,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -351,23 +366,27 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
           - in: query
             name: target_code
-            type: string
+            schema:
+              type: string
             required: true
             description: Video Code
           - in: query
             name: filename
-            type: string
+            schema:
+              type: string
             required: true
             description: Original filename
           - in: query
             name: thumbnail
-            type: string
-            format: binary
+            schema:
+              type: string
+              format: binary
             required: true
             description: File data
         responses:
@@ -391,7 +410,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -412,7 +432,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:
@@ -435,7 +456,8 @@ paths:
         parameters:
           - in: query
             name: code
-            type: string
+            schema:
+              type: string
             required: true
             description: User Code
         responses:

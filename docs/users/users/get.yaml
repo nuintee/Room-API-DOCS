@@ -2,6 +2,7 @@ tags:
   - user
 description: |
   Gets all users
+summary: "Gets all users (beSTREAM)"
 security:
   - basicAuth: []
 responses:

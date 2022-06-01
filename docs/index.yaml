@@ -349,4 +349,67 @@ paths:
                 type: string
                 example: success
   
+  /user/video/delete:
+    post:
+      tags:
+        - videos:bestream
+      summary: Deletes video
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: success
   
+  /user/video/download-link/{video_code}:
+    post:
+      tags:
+        - videos:bestream
+      summary: Gets download url
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              limit:
+                type: string
+              url:
+                type: string
+                example: https://bestream-dev-convert-jp.s3.ap-northeast-1.amazonaws.com/OgwlAk/zvAUngGh/zvAUngGh.webm?X-Amz-Content-Sha256=UNSIGNED-PAYL...
+  
+  /user/album:
+    post:
+      tags:
+        - albums:bestream
+      summary: Gets album
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: success

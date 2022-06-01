@@ -2084,6 +2084,52 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+  
+  /thread/{thread_id}:
+    get:
+      tags:
+          - threads
+      summary: Gets particluar threads
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: thread_id
+          schema:
+            type: string
+          required: true
+          description: Thread ID
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Thread"    
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+    put:
+    delete:
 
 components:
   schemas:
@@ -2199,6 +2245,8 @@ components:
       type: object
       properties:
         comment_id:
+          type: integer
+        thread_id:
           type: integer
         comment:
           type: string

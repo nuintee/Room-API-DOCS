@@ -97,6 +97,12 @@ paths:
               type: string
             required: false
             description: User's name
+          - in: query
+            name: email
+            schema:
+              type: string
+            required: false
+            description: User's email address
         responses:
           "200":
             description: Success

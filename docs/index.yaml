@@ -74,6 +74,9 @@ tags:
 
   - name: comments
     description: (Room)
+  
+  - name: threads
+    description: (Room)
 
 paths:
   /users:

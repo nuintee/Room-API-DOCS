@@ -1424,6 +1424,68 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HTTP404"
+  
+    put:
+        tags:
+          - files
+        summary: Updates particluar file
+        parameters:
+            - in: query
+              name: access_code
+              schema:
+                type: string
+              required: true
+              description: Access code
+            - in: path
+              name: file_id
+              schema:
+                type: string
+              required: true
+              description: File ID
+        
+        requestBody:
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_name:
+                    type: string
+                  mime_type:
+                    type: string
+                  file_url:
+                    type: string
+                  uploaded_at: 
+                    type: integer
+                    format: date
+                  provider_id:
+                    type: integer
+
+        responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/File"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
     
 
 components:

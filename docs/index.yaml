@@ -1048,6 +1048,60 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HTTP404"
+    put:
+      tags:
+        - chats
+      summary: Update particular message
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: message_id
+          schema:
+            type: integer
+          required: true
+          description: message_id
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                messaage:
+                  type: string
+                type:
+                  type: string
+                file_id:
+                  type: integer
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chat"
+        "400":
+          description: Missing Parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP400"
+        "401":
+          description: Unauthorized Access
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP401"
+        "404":
+          description: Invalid Data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP404"
 
 components:
   schemas:
@@ -1102,6 +1156,8 @@ components:
           enum:
             - text
             - file
+        file_id:
+          type: integer
     
     HTTP400:
       type: object

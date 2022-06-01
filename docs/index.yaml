@@ -1,11 +1,14 @@
 openapi: 3.0.0
+
 info:
   title: Room
   description: Internal API specification document
   version: 2.0.0
+
 servers:
   - url: https://dev.bestream.com/linkage/api/v1
     description: beSTREAM API
+
   - url: http://{host}:{port}/api/v1
     description: Development API
     variables:
@@ -13,6 +16,7 @@ servers:
         default: localhost
       port:
         default: '3000'
+
   - url: https://{host}:{port}/api/v1
     description: Room Production API
     variables:
@@ -20,8 +24,18 @@ servers:
         default: localhost
       port:
         default: '3001'
-paths:
 
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Credentials or access token for API
+
+security:
+  - BearerAuth: []
+
+paths:
   /users:
       get:
         tags:

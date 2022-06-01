@@ -552,6 +552,12 @@ paths:
             type: string
           required: true
           description: Access code
+        - in: query
+          name: code
+          schema:
+            type: string
+          required: false
+          description: User code
       responses:
           "200":
             description: Success

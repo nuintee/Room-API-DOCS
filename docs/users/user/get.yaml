@@ -2,6 +2,7 @@ tags:
   - user
 description: |
   Gets Particular User
+summary: "Gets particular user (beSTREAM)"
 parameters:
   - name: "uid"
     in: "path"
@@ -35,6 +36,21 @@ responses:
         username: 
           type: string
           example: xxx
+  "400":
+    description: Bad Request
+    schema:
+      title: ObjectOfError
+      type: object
+      properties:
+        status: 
+          type: integer
+          example: 400
+        reason:
+          type: string
+          example: BAD_REQUEST
+        message:
+          type: string
+          example: Missing Parameters
   "401":
     description: Rejected
     schema:

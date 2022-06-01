@@ -1,19 +1,18 @@
-swagger: "3.0"
+swagger: "2.0"
 
 info:
   version: "2.0.0"
   title: Room
+  description: |
+    [Base URL Room: https://academy-proto.glitch.me ]
 
+schemes:
+  - http
+  - https
 host: dev.bestream.com
 basePath: /linkage/v1
 
 securityDefinitions:
-  basicAuth:
-    type: basic
-  tokenAuth:
-    type: "apiKey"
-    name: "Authorization"
-    in: "header"
   Bearer:
     type: apiKey
     name: Authorization

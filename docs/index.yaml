@@ -1486,6 +1486,60 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+  
+    delete:
+        tags:
+          - files
+        summary: Deletes particluar file from the room
+        parameters:
+            - in: query
+              name: access_code
+              schema:
+                type: string
+              required: true
+              description: Access code
+            - in: path
+              name: file_id
+              schema:
+                type: string
+              required: true
+              description: File ID
+
+        responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: "file deleted from the room"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
     
 
 components:

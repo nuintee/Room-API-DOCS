@@ -647,13 +647,31 @@ paths:
                   properties:
                     status: 
                       type: integer
-                      example: 200
+                      default: 200
                     type:
                       type: string
-                      example: OPERATION_SUCCEED
+                      default: OPERATION_SUCCEED
                     message:
                       type: string
-                      example: room added
+                      default: room added
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
 
 components:
   schemas:
@@ -691,6 +709,45 @@ components:
           type: string
         username: 
           type: string
+
+    HTTP400:
+      type: object
+      properties:
+        status: 
+          type: integer
+          default: 400
+        type:
+          type: string
+          default: MISSING_PARAMETERS
+        message:
+          type: string
+          default: "{param} is missing"
+
+    HTTP401:
+      type: object
+      properties:
+        status: 
+          type: integer
+          default: 401
+        type:
+          type: string
+          default: AUTHORIZATION_ERROR
+        message:
+          type: string
+          default: "user is not authorized"
+
+    HTTP404:
+      type: object
+      properties:
+        status: 
+          type: integer
+          default: 404
+        type:
+          type: string
+          default: INVALID_DATA
+        message:
+          type: string
+          default: "invalid data"
         
 
   securitySchemes:

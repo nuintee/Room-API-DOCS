@@ -829,22 +829,14 @@ paths:
             name: sender_id
             schema:
               type: integer
-            required: false
+            required: true
             description: Sender ID
           - in: query
             name: receiver_id
             schema:
               type: integer
-            required: false
-            description: Receiver ID
-          - in: query
-            name: either_id
-            schema:
-              type: string
-              enum: ["{sender_id}","{receiver_id}"]
             required: true
             description: Receiver ID
-
 
         responses:
           "200":
@@ -863,6 +855,65 @@ paths:
                         $ref: "#/components/schemas/Chat"
                     total:
                       type: integer
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+    delete:
+        tags:
+          - chats
+        summary: Delete all chat history
+        parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+          - in: query
+            name: sender_id
+            schema:
+              type: integer
+            required: true
+            description: Sender ID
+          - in: query
+            name: receiver_id
+            schema:
+              type: integer
+            required: true
+            description: Receiver ID
+
+        responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: "Chat history deleted"
           "400":
             description: Missing Parameters
             content:

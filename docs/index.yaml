@@ -1540,6 +1540,59 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+  
+  /providers/{provider_id}:
+    get:
+      tags:
+          - files
+      summary: Gets provider [DEPRECATED]
+      description: | 
+        [⚠️ WARN] : This can be implemented in client side.
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: provider_id
+          schema:
+            type: string
+          required: true
+          description: Provider ID
+      
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    provider_id:
+                      type: integer
+                    type:
+                      type: string
+                      enum: [local,bestream,youtube]
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
     
 
 components:

@@ -1,12 +1,11 @@
-swagger: "2.0"
+swagger: "3.0"
 
 info:
   version: "2.0.0"
   title: Room
 
-schemes:
-- "https"
-- "http"
+host: dev.bestream.com
+basePath: /linkage/v1
 
 securityDefinitions:
   basicAuth:

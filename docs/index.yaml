@@ -62,6 +62,9 @@ tags:
 
   - name: rooms
     description: (Room)
+  
+  - name: chats
+    description: (Room)
 
 paths:
   /users:
@@ -585,6 +588,24 @@ paths:
                       total:
                         type: integer
                         example: 10
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
   
   /room:
     get:
@@ -611,6 +632,24 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/Room"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
     post:
       tags: 
         - rooms
@@ -665,13 +704,160 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: "#/components/schemas/HTTP400"
+                  $ref: "#/components/schemas/HTTP401"
           "404":
             description: Invalid Data
             content:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+
+    put:
+      tags: 
+        - rooms
+      summary: Adds Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Room"
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: room updated
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+
+    delete:
+      tags: 
+        - rooms
+      summary: Adds Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: room deleted
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+  
+  /chats:
+    get:
+        tags:
+          - chats
+        summary: Gets all chat history
+        parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+          - in: query
+            name: sender_id
+            schema:
+              type: integer
+            required: true
+            description: Sender ID
+          - in: query
+            name: receiver_id
+            schema:
+              type: integer
+            required: true
+            description: Receiver ID
+        responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    next:
+                      type: boolean
+                    pages:
+                      type: integer
+                    payload:
+                      type: array
+                      items:
+                        properties: 
+                          id:
+                            type: integer
+                    total: 
+                      type: integer
+
 
 components:
   schemas:

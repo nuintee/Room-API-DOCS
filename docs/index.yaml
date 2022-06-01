@@ -1810,6 +1810,62 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+    
+    put:
+      tags:
+          - comments
+      summary: Update particluar comment
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: path
+          name: comment_id
+          schema:
+            type: string
+          required: true
+          description: Comment ID
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                play_position:
+                  type: integer
+                  format: timestamp
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Comment"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
 
 components:
   schemas:

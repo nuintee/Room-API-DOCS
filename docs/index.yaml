@@ -69,6 +69,9 @@ tags:
   - name: avatars
     description: (Room)
 
+  - name: files
+    description: (Room)
+
 paths:
   /users:
       get:
@@ -1261,6 +1264,67 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HTTP404"
+
+    post:
+      tags:
+        - files
+      summary: Adds File in the room
+      parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+          - in: path
+            name: room_id
+            schema:
+              type: string
+            required: true
+            description: Room ID
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                file_name:
+                  type: string
+                mime_type:
+                  type: string
+                file_url:
+                  type: string
+                uploaded_at: 
+                  type: integer
+                  format: date
+                provider_id:
+                  type: integer
+
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/File"
+        "400":
+          description: Missing Parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP400"
+        "401":
+          description: Unauthorized Access
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP401"
+        "404":
+          description: Invalid Data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP404"
     
     delete:
       tags:
@@ -1296,7 +1360,52 @@ paths:
                       default: OPERATION_SUCCEED
                     message:
                       type: string
-                      default: "file deleted"
+                      default: "files deleted"
+        "400":
+          description: Missing Parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP400"
+        "401":
+          description: Unauthorized Access
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP401"
+        "404":
+          description: Invalid Data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP404"
+      
+  /file/{file_id}:
+    get:
+      tags:
+        - files
+      summary: Gets particluar file
+      parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+          - in: path
+            name: file_id
+            schema:
+              type: string
+            required: true
+            description: File ID
+
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/File"
         "400":
           description: Missing Parameters
           content:
@@ -1390,6 +1499,8 @@ components:
           type: integer
         file_id:
           type: integer
+        file_name:
+          type: string
         mime_type:
           type: string
         file_url:

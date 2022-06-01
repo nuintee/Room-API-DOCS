@@ -1155,6 +1155,54 @@ paths:
               application/json:
                 schema:
                   $ref: "#/components/schemas/HTTP404"
+  /avatars:
+    get:
+        tags:
+          - avatars
+        summary: Gets all Avatars
+        parameters:
+          - in: query
+            name: access_code
+            schema:
+              type: string
+            required: true
+            description: Access code
+
+        responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    next:
+                      type: boolean
+                    pages:
+                      type: integer
+                    payload:
+                      items:
+                        $ref: "#/components/schemas/Avatar"
+                    total:
+                      type: integer
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
 
 components:
   schemas:
@@ -1211,6 +1259,17 @@ components:
             - file
         file_id:
           type: integer
+    
+    Avatar:
+      type: object
+      properties:
+        avatar_id:
+          type: integer
+        title:
+          type: string
+        avatar_url:
+          type: string
+
     
     HTTP400:
       type: object

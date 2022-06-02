@@ -137,6 +137,127 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Group"
+                    
+  
+  /kick:
+    delete:
+      tags:
+        - 🙏 requests
+      summary: Kick user from group
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+          required: true
+          description: User Code
+        - in: query
+          name: room_id
+          schema:
+            type: integer
+          required: true
+          description: Room ID
+        - in: query
+          name: target_user_id
+          schema:
+            type: integer
+          required: true
+          description: Target user ID
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: 
+                    type: integer
+                    default: 200
+                  type:
+                    type: string
+                    default: OPERATION_SUCCEED
+                  message:
+                    type: string
+                    default: user kicked
+        "400":
+          description: Missing Parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP400"
+        "401":
+          description: Unauthorized Access
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP401"
+        "404":
+          description: Invalid Data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP404"
+
+  /invite:
+    post:
+      tags:
+        - 🙏 requests
+      summary: Invite user to group
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+          required: true
+          description: User Code
+        - in: query
+          name: room_id
+          schema:
+            type: integer
+          required: true
+          description: Room ID
+        - in: query
+          name: target_user_id
+          schema:
+            type: integer
+          required: true
+          description: Target user ID
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: 
+                    type: integer
+                    default: 200
+                  type:
+                    type: string
+                    default: OPERATION_SUCCEED
+                  message:
+                    type: string
+                    default: user invited
+        "400":
+          description: Missing Parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP400"
+        "401":
+          description: Unauthorized Access
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP401"
+        "404":
+          description: Invalid Data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTP404"
 
 
 

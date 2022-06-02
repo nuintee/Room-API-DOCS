@@ -118,6 +118,27 @@ paths:
                         type: object
                       subscription:
                         type: object
+  /group:
+    get:
+      tags:
+        - 🙏 requests
+      summary: Get your belonging group info
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+          required: true
+          description: User Code
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+
+
 
   /user:
       get:
@@ -2278,6 +2299,25 @@ components:
           type: string
         username: 
           type: string
+
+    Group:
+      type: object
+      properties:
+        group_name:
+          type: string
+        group_master_id:
+          type: string
+        group_createad_at:
+          type: integer
+          format: date
+        group_toal_members:
+          type: integer
+        group_members:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+              
+        
     
     Chat:
       type: object

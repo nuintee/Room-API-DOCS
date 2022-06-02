@@ -118,25 +118,296 @@ paths:
                         type: object
                       subscription:
                         type: object
-  /group:
+  /rooms:
     get:
-      tags:
+      tags: 
         - 🙏 requests
-      summary: Get your belonging group info
+      summary: Gets All Room
       parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
         - in: query
           name: code
           schema:
             type: string
-          required: true
-          description: User Code
+          required: false
+          description: User code
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+          description: Room name
       responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Group"
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    properties:
+                      next:
+                        type: boolean
+                      pages:
+                        type: integer
+                        example: 2
+                      payload:
+                        type: array
+                        items:
+                          $ref: "#/components/schemas/Room"
+                      total:
+                        type: integer
+                        example: 10
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+  
+  /room:
+    get:
+      tags: 
+        - 🙏 requests
+      summary: Gets Particluar Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: query
+          name: room_id
+          schema:
+            type: string
+          required: true
+          description: Room ID
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Room"
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+    post:
+      tags: 
+        - 🙏 requests
+      summary: Adds Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                room_name:
+                  type: string
+                cover:
+                  type: string
+                invited_users_id:
+                  type: array
+                  items:
+                    type: integer
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: room added
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+
+    put:
+      tags: 
+        - 🙏 requests
+      summary: Updates Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: query
+          name: room_id
+          schema:
+            type: integer
+          required: true
+          description: Room ID
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                cover:
+                  type: string
+                room_name:
+                  type: string
+                room_users:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/User"
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: room updated
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
+
+    delete:
+      tags: 
+        - 🙏 requests
+      summary: Deletes Room
+      parameters:
+        - in: query
+          name: access_code
+          schema:
+            type: string
+          required: true
+          description: Access code
+        - in: query
+          name: room_id
+          schema:
+            type: integer
+          required: true
+          description: Room ID
+
+      responses:
+          "200":
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    status: 
+                      type: integer
+                      default: 200
+                    type:
+                      type: string
+                      default: OPERATION_SUCCEED
+                    message:
+                      type: string
+                      default: room deleted
+          "400":
+            description: Missing Parameters
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP400"
+          "401":
+            description: Unauthorized Access
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP401"
+          "404":
+            description: Invalid Data
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/HTTP404"
                     
   
   /kick:
@@ -703,275 +974,7 @@ paths:
                       type: string
                       example: success
 
-  /rooms:
-    get:
-      tags: 
-        - rooms
-      summary: Gets All Room
-      parameters:
-        - in: query
-          name: access_code
-          schema:
-            type: string
-          required: true
-          description: Access code
-        - in: query
-          name: code
-          schema:
-            type: string
-          required: false
-          description: User code
-        - in: query
-          name: name
-          schema:
-            type: string
-          required: false
-          description: Room name
-      responses:
-          "200":
-            description: Success
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    properties:
-                      next:
-                        type: boolean
-                      pages:
-                        type: integer
-                        example: 2
-                      payload:
-                        type: array
-                        items:
-                          $ref: "#/components/schemas/Room"
-                      total:
-                        type: integer
-                        example: 10
-          "400":
-            description: Missing Parameters
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP400"
-          "401":
-            description: Unauthorized Access
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP401"
-          "404":
-            description: Invalid Data
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP404"
   
-  /room:
-    get:
-      tags: 
-        - rooms
-      summary: Gets Particluar Room
-      parameters:
-        - in: query
-          name: access_code
-          schema:
-            type: string
-          required: true
-          description: Access code
-        - in: query
-          name: room_id
-          schema:
-            type: string
-          required: true
-          description: Room ID
-      responses:
-          "200":
-            description: Success
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/Room"
-          "400":
-            description: Missing Parameters
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP400"
-          "401":
-            description: Unauthorized Access
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP401"
-          "404":
-            description: Invalid Data
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP404"
-    post:
-      tags: 
-        - rooms
-      summary: Adds Room
-      parameters:
-        - in: query
-          name: access_code
-          schema:
-            type: string
-          required: true
-          description: Access code
-      requestBody:
-        content: 
-          application/json:
-            schema:
-              type: object
-              properties:
-                room_name:
-                  type: string
-                cover:
-                  type: string
-                invited_users_id:
-                  type: array
-                  items:
-                    type: integer
-
-      responses:
-          "200":
-            description: Success
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status: 
-                      type: integer
-                      default: 200
-                    type:
-                      type: string
-                      default: OPERATION_SUCCEED
-                    message:
-                      type: string
-                      default: room added
-          "400":
-            description: Missing Parameters
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP400"
-          "401":
-            description: Unauthorized Access
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP401"
-          "404":
-            description: Invalid Data
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP404"
-
-    put:
-      tags: 
-        - rooms
-      summary: Adds Room
-      parameters:
-        - in: query
-          name: access_code
-          schema:
-            type: string
-          required: true
-          description: Access code
-      requestBody:
-        content: 
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Room"
-
-      responses:
-          "200":
-            description: Success
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status: 
-                      type: integer
-                      default: 200
-                    type:
-                      type: string
-                      default: OPERATION_SUCCEED
-                    message:
-                      type: string
-                      default: room updated
-          "400":
-            description: Missing Parameters
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP400"
-          "401":
-            description: Unauthorized Access
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP401"
-          "404":
-            description: Invalid Data
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP404"
-
-    delete:
-      tags: 
-        - rooms
-      summary: Adds Room
-      parameters:
-        - in: query
-          name: access_code
-          schema:
-            type: string
-          required: true
-          description: Access code
-
-      responses:
-          "200":
-            description: Success
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status: 
-                      type: integer
-                      default: 200
-                    type:
-                      type: string
-                      default: OPERATION_SUCCEED
-                    message:
-                      type: string
-                      default: room deleted
-          "400":
-            description: Missing Parameters
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP400"
-          "401":
-            description: Unauthorized Access
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP401"
-          "404":
-            description: Invalid Data
-            content:
-              application/json:
-                schema:
-                  $ref: "#/components/schemas/HTTP404"
   
   /chats:
     get:
